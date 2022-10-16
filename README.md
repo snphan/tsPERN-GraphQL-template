@@ -1,12 +1,6 @@
-# izakaya-blog
+# type-PERN
 
-A Blog built with React.
-
-CI/CD will be set up through github actions.
-
-Try out TDD
-
-Express backend with GraphQL
+A template to work with Postgres, Express, React, Node.js and GraphQL
 
 # Quickstart
 
