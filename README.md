@@ -9,6 +9,6 @@ A template to work with Postgres, Express, React, Node.js and GraphQL
 
         docker-compose up -d --build
 
-1. api will be at http://localhost:3000 and blog will be at http://localhost:8000
+1. api will be at http://localhost:3000 and Client will be at http://localhost:8000
 
 Have fun developing!
