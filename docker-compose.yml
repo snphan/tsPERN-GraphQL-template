@@ -43,14 +43,14 @@ services:
   
   blog:
     build:
-      context: blog
+      context: client
       target: development-build-stage
       dockerfile: Dockerfile
     container_name: blog_client
     ports:
       - '8000:8000'
     volumes:
-      - ./blog:/app
+      - ./client:/app
       - /app/node_modules
     restart: 'unless-stopped'
 
