@@ -1,4 +1,4 @@
-# type-PERN
+# Typescript PERN Stack with GraphQL Template
 
 A template to work with Postgres, Express, React, Node.js and GraphQL
 
