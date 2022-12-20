@@ -12,3 +12,82 @@ A template to work with Postgres, Express, React, Node.js and GraphQL
 1. api will be at http://localhost:3000 and Client will be at http://localhost:8000
 
 Have fun developing!
+
+# API Specifications
+
+## Environment Variables
+
+Some local .env files are needed for production, dev and testing. Here are samples. Testing environment uses sqlite to test the database and queries.
+
+`.env.development.local`
+```
+# PORT
+PORT = 3000
+
+# DATABASE
+DB_HOST = pg
+DB_PORT = 5432
+DB_USER = root
+DB_PASSWORD = password
+DB_DATABASE = dev
+
+# TOKEN
+SECRET_KEY = secretKey
+
+# LOG
+LOG_FORMAT = dev
+LOG_DIR = ../logs
+
+# CORS
+ORIGIN = https://studio.apollographql.com
+CREDENTIALS = true
+```
+
+`.env.production.local`
+```
+# PORT
+PORT = 3000
+
+# DATABASE
+DB_HOST = localhost
+DB_PORT = 5432
+DB_USER = root
+DB_PASSWORD = password
+DB_DATABASE = prod
+
+# TOKEN
+SECRET_KEY = secretKey
+
+# LOG
+LOG_FORMAT = combined
+LOG_DIR = ../logs
+
+# CORS
+ORIGIN = false
+CREDENTIALS = true
+```
+
+`env.test.local`
+```
+# PORT
+PORT = 3003
+
+# DATABASE
+DB_TYPE = sqlite
+DB_HOST = localhost
+DB_PORT = 5432
+DB_USER = root
+DB_PASSWORD = password
+DB_DATABASE = test.sqlite3
+
+# TOKEN
+SECRET_KEY = secretKey
+
+# LOG
+LOG_FORMAT = dev
+LOG_DIR = ../logs/tests
+
+# CORS
+ORIGIN = true
+CREDENTIALS = true
+```
