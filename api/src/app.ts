@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { ApolloServerPluginLandingPageProductionDefault, ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { ApolloServerPluginLandingPageProductionDefault, ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { ApolloServer } from 'apollo-server-express';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
@@ -45,8 +45,8 @@ class App {
     return this.app;
   }
 
-  private connectToDatabase() {
-    createConnection(dbConnection);
+  private async connectToDatabase() {
+    await createConnection(dbConnection);
   }
 
   private initializeMiddlewares() {
@@ -55,7 +55,7 @@ class App {
       this.app.use(helmet());
     }
 
-    this.app.use(cors({ origin: ['https://studio.apollographql.com'], credentials: CREDENTIALS }));
+    this.app.use(cors({ origin: ['https://studio.apollographql.com', 'http://localhost:3000'], credentials: CREDENTIALS }));
     this.app.use(compression());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
@@ -75,10 +75,10 @@ class App {
           ? ApolloServerPluginLandingPageProductionDefault({ footer: false })
           : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
       ],
-      context: async ({ req }) => {
+      context: async ({ req, res }) => {
         try {
           const user = await authMiddleware(req);
-          return { user };
+          return { user, res };
         } catch (error) {
           throw new Error(error);
         }
@@ -93,7 +93,7 @@ class App {
 
         return error;
       },
-      
+
     });
 
     await apolloServer.start();
