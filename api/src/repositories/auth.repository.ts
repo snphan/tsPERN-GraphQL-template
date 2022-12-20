@@ -23,7 +23,7 @@ export default class AuthRepository {
     return createUserData;
   }
 
-  public async userLogIn(userData: CreateUserDto): Promise<{ cookie: string; findUser: User }> {
+  public async userLogIn(userData: CreateUserDto): Promise<{ tokenData: TokenData; findUser: User }> {
     if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
 
     const findUser: User = await UserEntity.findOne({ where: { email: userData.email } });
@@ -33,9 +33,9 @@ export default class AuthRepository {
     if (!isPasswordMatching) throw new HttpException(409, "Password is not matching");
 
     const tokenData = this.createToken(findUser);
-    const cookie = this.createCookie(tokenData);
+    // const cookie = this.createCookie(tokenData);
 
-    return { cookie, findUser };
+    return { tokenData, findUser };
   }
 
   public async userLogOut(userId: number): Promise<User> {
@@ -55,7 +55,7 @@ export default class AuthRepository {
     return { expiresIn, token: sign(dataStoredInToken, secretKey, { expiresIn }) };
   }
 
-  public createCookie(tokenData: TokenData): string {
-    return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}; SameSite=None; Secure`;
-  }
+  // public createCookie(tokenData: TokenData): string {
+  //   return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}; SameSite=None; Secure`;
+  // }
 }
