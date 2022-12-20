@@ -36,6 +36,8 @@ services:
       POSTGRESQL_USERNAME: root
       POSTGRESQL_PASSWORD: password
       POSTGRESQL_DATABASE: dev
+    volumes:
+      - pg-data:/bitnami/postgresql
     ports:
       - '5432:5432'
     networks:
@@ -46,7 +48,7 @@ services:
       context: client
       target: development-build-stage
       dockerfile: Dockerfile
-    container_name: blog_client
+    container_name: client
     ports:
       - '8000:8000'
     volumes:
