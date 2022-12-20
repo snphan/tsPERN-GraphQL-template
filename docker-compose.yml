@@ -43,7 +43,7 @@ services:
     networks:
       - backend
   
-  blog:
+  client:
     build:
       context: client
       target: development-build-stage
@@ -62,4 +62,6 @@ networks:
 
 volumes:
   data:
+    driver: local
+  pg-data:
     driver: local
