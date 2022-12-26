@@ -20,6 +20,7 @@ beforeAll(async () => {
 })
 
 afterAll(async () => {
+  /* Clean up the database after the test is done */
   const entities = getConnection().entityMetadatas;
   entities.forEach(async entity => {
     const repository = getConnection().getRepository(entity.name);
@@ -54,7 +55,7 @@ describe('Testing Auth', () => {
     });
   });
 
-  describe('[POST] /login', () => {
+  describe('[POST] /graphql', () => {
     it('response should have the Set-Cookie header with the Authorization token', async () => {
       const userData: CreateUserDto = {
         email: 'test@email.com',
@@ -76,7 +77,7 @@ describe('Testing Auth', () => {
     });
   });
 
-  describe('[POST] /logout', () => {
+  describe('[POST] /graphql', () => {
     it('logout Set-Cookie Authorization=; Max-age=0', async () => {
 
       const userData = {
