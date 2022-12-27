@@ -1,4 +1,4 @@
-import { User } from '@interfaces/users.interface';
+import { User } from '@entities/users.entity';
 
 export interface DataStoredInToken {
   id: number;
