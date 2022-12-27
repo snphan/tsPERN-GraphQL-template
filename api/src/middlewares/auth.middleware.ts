@@ -2,7 +2,7 @@ import { verify } from 'jsonwebtoken';
 import { AuthChecker } from 'type-graphql';
 import { getRepository } from 'typeorm';
 import { SECRET_KEY } from '@config';
-import { UserEntity } from '@entities/users.entity';
+import { User } from '@entities/users.entity';
 import { HttpException } from '@exceptions/HttpException';
 import { RequestWithUser, DataStoredInToken } from '@interfaces/auth.interface';
 
@@ -12,7 +12,7 @@ export const authMiddleware = async req => {
     if (Authorization) {
       const secretKey: string = SECRET_KEY;
       const { id } = (await verify(Authorization, secretKey)) as DataStoredInToken;
-      const userRepository = getRepository(UserEntity);
+      const userRepository = getRepository(User);
 
       const findUser = await userRepository.findOne(id, { select: ['id', 'email', 'password'] });
       return findUser;

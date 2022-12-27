@@ -31,7 +31,6 @@
       "@middlewares/*": ["middlewares/*"],
       "@repositories/*": ["repositories/*"],
       "@resolvers/*": ["resolvers/*"],
-      "@typedefs/*": ["typedefs/*"],
       "@utils/*": ["utils/*"]
     }
   },
