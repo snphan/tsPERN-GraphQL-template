@@ -48,3 +48,31 @@ jobs:
         ORIGIN: true
         CREDENTIALS: true
       run: npm test
+
+  test-client:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: api/package-lock.json
+    
+    - name: Clean and Install
+      working-directory: ./client
+      run: npm ci
+    
+    - name: Run Client test suite
+      working-directory: ./client
+      env:
+        CI: true
+      run: npm test
