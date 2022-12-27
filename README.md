@@ -91,3 +91,7 @@ LOG_DIR = ../logs/tests
 ORIGIN = true
 CREDENTIALS = true
 ```
+
+# Some Extra Notes
+
+* Repositories (typeORM) and Resolvers (graphQL) are kept separate because repositories provide functions to query and mutate the database. (You won't be able to get/mutate the data with the resolver methods inside your API).
