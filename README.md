@@ -67,7 +67,7 @@ ORIGIN = false
 CREDENTIALS = true
 ```
 
-`env.test.local`
+`.env.test.local`
 ```
 # PORT
 PORT = 3003
